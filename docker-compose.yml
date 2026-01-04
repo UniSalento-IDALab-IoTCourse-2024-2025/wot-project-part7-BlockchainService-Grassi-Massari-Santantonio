@@ -1,0 +1,36 @@
+services:
+  blockchain-sba:
+      image: eclipse-temurin:21-jdk
+      container_name: blockchain-sba
+      ports:
+        - 8085:8080
+        - 8005:8000
+      expose:
+        - "8005"
+      depends_on:
+        - blockchaindb
+      env_file:
+      - .env
+      networks:
+        - my-net
+      extra_hosts:
+      - "host.docker.internal:host-gateway"
+      volumes:
+        - ./build/libs/blockchain-0.0.1-SNAPSHOT.jar:/app/app.jar
+      working_dir: /app
+      entrypoint: >
+        java -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000 -jar /app/app.jar
+
+  blockchaindb:
+    image: mongo:5.0
+    container_name: blockchaindb
+    ports:
+        - 27021:27017
+    networks:
+          - my-net
+
+networks:
+      my-net:
+        driver:
+         'bridge'
+

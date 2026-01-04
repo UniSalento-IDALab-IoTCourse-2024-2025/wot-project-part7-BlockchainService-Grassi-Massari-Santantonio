@@ -1,0 +1,154 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "orderId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "riderId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "result",
+        "type": "string"
+      }
+    ],
+    "name": "OrderRecorded",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_orderId",
+        "type": "string"
+      }
+    ],
+    "name": "getOrder",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "orderId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "riderId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "shopId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "clientId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "orderDate",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "result",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "points",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct DeliveryStorage.Order",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getOrdersCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_orderId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_riderId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_shopId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_clientId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_orderDate",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_totalPrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_result",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_points",
+        "type": "uint256"
+      }
+    ],
+    "name": "recordOrder",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
