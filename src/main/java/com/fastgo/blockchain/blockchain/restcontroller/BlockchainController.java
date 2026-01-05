@@ -1,7 +1,9 @@
 package com.fastgo.blockchain.blockchain.restcontroller;
 
-import com.fastgo.blockchain.blockchain.dto.OrderBlockchainResponseDto;
-import com.fastgo.blockchain.blockchain.dto.OrderRegistrationDto;
+import com.fastgo.blockchain.blockchain.dto.Blockchain.OrderBlockchainResponseDto;
+import com.fastgo.blockchain.blockchain.dto.Blockchain.OrderRegistrationDto;
+import com.fastgo.blockchain.blockchain.dto.Nft.RiderPointsRequestDto;
+import com.fastgo.blockchain.blockchain.dto.Nft.RiderPointsResponseDto;
 import com.fastgo.blockchain.blockchain.service.BlockchainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,5 +44,23 @@ public class BlockchainController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Error verifying order: " + e.getMessage());
         }
+    }
+
+
+    @PostMapping("/rider/points")
+    public ResponseEntity<RiderPointsResponseDto> getRiderPoints(@RequestBody RiderPointsRequestDto request) {
+        
+        if (request.getRiderId() == null || request.getRiderId().isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        int points = blockchainService.getRiderTotalPoints(request.getRiderId());
+
+        RiderPointsResponseDto response = new RiderPointsResponseDto(
+            request.getRiderId(), 
+            points
+        );
+
+        return ResponseEntity.ok(response);
     }
 }

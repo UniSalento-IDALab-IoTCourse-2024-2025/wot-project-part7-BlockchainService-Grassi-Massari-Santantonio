@@ -2,9 +2,10 @@ package com.fastgo.blockchain.blockchain.service;
 
 import com.fastgo.blockchain.blockchain.domain.BlockchainData;
 import com.fastgo.blockchain.blockchain.domain.OrderBlockchain;
-import com.fastgo.blockchain.blockchain.dto.BlockchainReceiptDto;
-import com.fastgo.blockchain.blockchain.dto.OrderBlockchainResponseDto;
-import com.fastgo.blockchain.blockchain.dto.OrderRegistrationDto;
+import com.fastgo.blockchain.blockchain.dto.Blockchain.BlockchainReceiptDto;
+import com.fastgo.blockchain.blockchain.dto.Blockchain.OrderBlockchainResponseDto;
+import com.fastgo.blockchain.blockchain.dto.Blockchain.OrderRegistrationDto;
+
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;

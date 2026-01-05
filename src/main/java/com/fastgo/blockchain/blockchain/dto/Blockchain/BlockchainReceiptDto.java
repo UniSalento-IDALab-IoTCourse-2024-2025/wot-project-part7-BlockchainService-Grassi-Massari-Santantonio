@@ -1,4 +1,4 @@
-package com.fastgo.blockchain.blockchain.dto;
+package com.fastgo.blockchain.blockchain.dto.Blockchain;
 
 import java.time.Instant;
 

@@ -1,10 +1,10 @@
 package com.fastgo.blockchain.blockchain.service;
 
 import com.fastgo.blockchain.blockchain.domain.OrderBlockchain;
-import com.fastgo.blockchain.blockchain.dto.OrderBlockchainResponseDto;
-import com.fastgo.blockchain.blockchain.dto.OrderRegistrationDto;
+import com.fastgo.blockchain.blockchain.dto.Blockchain.OrderBlockchainResponseDto;
+import com.fastgo.blockchain.blockchain.dto.Blockchain.OrderRegistrationDto;
 import com.fastgo.blockchain.blockchain.repositories.BlockchainRepository;
-import com.fastgo.blockchain.blockchain.wrappers.DeliveryStorage; // Il wrapper che hai generato
+import com.fastgo.blockchain.blockchain.wrappers.DeliveryStorage; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,6 +23,9 @@ public class BlockchainService {
     @Autowired
     private BlockchainRepository blockchainRepository;
 
+    @Autowired 
+    private BadgeService badgeService;
+
     @Autowired
     private OrderConverter converter;
 
@@ -35,6 +38,8 @@ public class BlockchainService {
     @Value("${blockchain.contract-address}")
     private String contractAddress;
 
+    
+
     // Configurazioni Gas 
     // GAS_LIMIT: Quanto lavoro massimo può fare la transazione 
     // GAS_PRICE: Quanto si paga per unità 
@@ -46,7 +51,7 @@ public class BlockchainService {
      */
     public OrderBlockchainResponseDto registerOrder(OrderRegistrationDto request) {
 
-        // Salvataggio iniziale (Stato Pending)
+        
         OrderBlockchain orderEntity = converter.toEntity(request);
         orderEntity = blockchainRepository.save(orderEntity);
 
@@ -97,6 +102,21 @@ public class BlockchainService {
             
             throw new BlockchainException("Errore critico durante la scrittura su Blockchain: " + e.getMessage());
         }
+
+        try {
+            // Calcolo i punti totali del rider
+            int totalPoints = getRiderTotalPoints(request.getRiderId());
+            
+            // Controllo se merita un badge
+            badgeService.checkAndAssignBadges(request.getRiderId(), totalPoints);
+            
+        } catch (Exception e) {
+            // Loggo l'errore ma NON blocco il ritorno della risposta
+            // L'ordine è stato salvato, se il badge fallisce pazienza, riproverà al prossimo ordine
+            System.err.println("Errore calcolo badge: " + e.getMessage());
+        }
+
+
         
         return converter.toResponseDto(orderEntity);
     }
@@ -161,4 +181,15 @@ public class BlockchainService {
             super(message);
         }
     }
+
+
+    public int getRiderTotalPoints(String riderId) {
+    
+    var result = blockchainRepository.sumPointsByRiderId(riderId);
+
+    if (result == null) {
+        return 0;
+    }
+    return (int) result.total();
+}
 }
