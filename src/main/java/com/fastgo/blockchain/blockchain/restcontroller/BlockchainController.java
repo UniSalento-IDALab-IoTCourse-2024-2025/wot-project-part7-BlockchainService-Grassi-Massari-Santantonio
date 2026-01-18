@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/blockchain")
+@CrossOrigin(origins = "*")
 public class BlockchainController {
 
     @Autowired
@@ -45,6 +46,7 @@ public class BlockchainController {
             return ResponseEntity.internalServerError().body("Error verifying order: " + e.getMessage());
         }
     }
+
 
 
     @PostMapping("/rider/points")

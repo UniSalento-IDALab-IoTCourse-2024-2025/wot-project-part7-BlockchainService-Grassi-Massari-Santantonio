@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/nft")
+@CrossOrigin(origins = "*")
 public class NftController {
 
     @Autowired
@@ -43,7 +44,7 @@ public class NftController {
     @PostMapping("/rider-badges")
    public ResponseEntity<ListBadgeResponseDto> getRiderBadges(@RequestBody RiderRequestDto request) {
         
-        // Il Controller delega tutto al Service
+        
         List<BadgeResponseDto> badges = badgeService.getBadgesForRider(request.getRiderId());
 
         if (badges.isEmpty()) {
