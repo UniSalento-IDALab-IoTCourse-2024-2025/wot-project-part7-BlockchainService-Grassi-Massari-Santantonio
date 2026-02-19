@@ -50,7 +50,7 @@ Di seguito la lista completa dei repository che compongono il sistema IoT FastGo
 * [**Smart Contract: NFT**](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-part9-Contract_NFT-Grassi-Massari-Santantonio) - Contratto ERC-721 per la gestione dei Badge premio per i rider.
 
 ---
-[**Project Presentation Page**](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-2024-2025-part1-Grassi-Massari-Santantonio/tree/main)
+[**Project Presentation Page**](https://unisalento-idalab-iotcourse-2024-2025.github.io/wot-project-2024-2025-part1-Grassi-Massari-Santantonio/)
 
 
 
